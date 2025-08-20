@@ -1,0 +1,20 @@
+:root {
+  --ff-inter: "Inter", sans-serif;
+
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  --color-main: #101828;
+  --color-text: #475467;
+  --color-white: #FFFFFF;
+  --color-inputs: #F7F7F7;
+  --color-badges: #F2F4F7;
+  --color-gray: #6C717B;
+  --color-gray-light: #DADDE1;
+  --color-button: #E44848;
+  --color-button-hover: #D84343;
+  --color-rating: #FFC531;
+
+  --transition: 0.3s ease;
+}
