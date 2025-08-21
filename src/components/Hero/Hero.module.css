@@ -1,0 +1,36 @@
+.hero {
+  background-image: image-set(url('../../assets/img/TravelTrucksPicture.jpg') 1x,
+      url('../../assets/img/TravelTrucksPicture2x.jpg') 2x);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  /* height: calc(100vh - 72px); */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.title{
+  font-family: var(--font-family);
+  font-weight: var(--fw-semibold);
+  font-size: 48px;
+  line-height: 67%;
+  color: var(--color-inputs);
+  margin-bottom: 16px;
+}
+
+.text{
+  font-family: var(--font-family);
+  font-size: 24px;
+  line-height: 133%;
+  color: var(--color-inputs);
+  margin-bottom: 40px;
+}
+
+
+.wrapper{
+    width: 100%;
+      max-width: 1440px;
+      margin-inline: auto;
+}
