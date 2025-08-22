@@ -12,7 +12,7 @@ const Hero = () => {
         <p className={s.text}>
           You can find everything you want in our catalog
         </p>
-        <Button onClick={() => navigate('/campers')}>View Now</Button>
+        <Button onClick={() => navigate('/catalog')}>View Now</Button>
       </div>
     </section>
   );
