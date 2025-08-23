@@ -1,16 +1,35 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './CatalogItem.module.css';
-import { Map, StarRating, Heart } from '../../assets/icons/iconsComp.js';
+import {
+  Map,
+  StarRating,
+  Heart,
+  HeartT,
+} from '../../assets/icons/iconsComp.js';
 import { mapFeatures } from '../../utils/featuresMapper.js';
-import Button from '../Button/Button.jsx'; // ← підключаємо твій компонент
+import Button from '../Button/Button.jsx';
+import { toggleFavorite } from '../../redux/favorite/favoriteSlice.js';
 
 const CatalogItem = ({ camper }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const favorites = useSelector(state => state.favorite.items);
+  const isFavorite = favorites.includes(camper.id);
+
   const features = mapFeatures(camper);
 
   const handleShowMore = () => {
     navigate(`/catalog/${camper.id}`);
   };
+
+  const handleFavorite = () => {
+    dispatch(toggleFavorite(camper.id));
+  };
+
+  console.log('Favorites:', favorites);
+  console.log('isFavorite:', isFavorite);
 
   return (
     <div className={s.card}>
@@ -27,7 +46,10 @@ const CatalogItem = ({ camper }) => {
           <h3 className={s.name}>{camper.name}</h3>
           <div className={s.price}>
             €{Number(camper.price).toFixed(2)}
-            <button className={s.favorite}>
+            <button
+              className={`${s.favorite} ${isFavorite ? s.active : ''}`}
+              onClick={handleFavorite}
+            >
               <Heart width={24} height={24} />
             </button>
           </div>

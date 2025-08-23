@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CatalogList from '../../components/CatalogList/CatalogList';
 import s from './CatalogPage.module.css';
@@ -16,35 +16,44 @@ import { selectFilters } from '../../redux/filters/filtersSelectors';
 import { clearCampers } from '../../redux/campers/campersSlice';
 import { resetFilters } from '../../redux/filters/filtersSlice';
 
+import {
+  setPage,
+  setAppliedFilters,
+  resetUi,
+} from '../../redux/ui/catalogUiSlice';
+
 const CatalogPage = () => {
   const dispatch = useDispatch();
+
   const campers = useSelector(selectCampers);
   const total = useSelector(selectTotal);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const filters = useSelector(selectFilters);
 
-  const [page, setPage] = useState(1);
-  const [appliedFilters, setAppliedFilters] = useState({});
+  const page = useSelector(state => state.catalogUi.page);
+  const appliedFilters = useSelector(state => state.catalogUi.appliedFilters);
+
   const limit = 4;
 
   useEffect(() => {
     dispatch(fetchCampers({ page, limit, filters: appliedFilters }));
   }, [dispatch, page, limit, appliedFilters]);
 
-  const handleLoadMore = () => setPage(prev => prev + 1);
+  const handleLoadMore = () => {
+    dispatch(setPage(page + 1));
+  };
 
   const handleSearch = () => {
     dispatch(clearCampers());
-    setPage(1);
-    setAppliedFilters(filters);
+    dispatch(setPage(1));
+    dispatch(setAppliedFilters(filters));
   };
 
   const handleReset = () => {
     dispatch(resetFilters());
-    setAppliedFilters({});
     dispatch(clearCampers());
-    setPage(1);
+    dispatch(resetUi());
   };
 
   return (
