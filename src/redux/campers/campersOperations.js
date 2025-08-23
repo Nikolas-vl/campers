@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import campersApi from '../../api/campersAppi';
 
-// GET /campers (з фільтрами)
 export const fetchCampers = createAsyncThunk(
   'campers/fetchAll',
   async (filters, thunkAPI) => {
@@ -13,7 +12,6 @@ export const fetchCampers = createAsyncThunk(
   }
 );
 
-// GET /campers/:id
 export const fetchCamperById = createAsyncThunk(
   'campers/fetchById',
   async (id, thunkAPI) => {

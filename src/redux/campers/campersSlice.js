@@ -1,10 +1,9 @@
-// redux/campers/campersSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCampers, fetchCamperById } from './campersOperations';
 
 const initialState = {
-  items: [], // ← лише масив карток
-  total: 0, // ← загальна кількість
+  items: [],
+  total: 0,
   selectedCamper: null,
   loading: false,
   error: null,
@@ -30,8 +29,17 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload.items;
-        state.total = action.payload.total ?? action.payload.items?.length ?? 0;
+
+        const { items, total } = action.payload;
+        const page = Number(action.meta.arg?.page || 1);
+
+        if (page === 1) {
+          state.items = items;
+        } else {
+          state.items = [...state.items, ...items];
+        }
+
+        state.total = total ?? state.items.length;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
