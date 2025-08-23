@@ -1,24 +1,31 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCampers } from '../../redux/campersSlice';
 import CatalogList from '../../components/CatalogList/CatalogList';
+import Loader from '../../components/Loader/Loader';
+import { fetchCampers } from '../../redux/campers/campersOperations';
+import {
+  selectCampers,
+  selectIsLoading,
+  selectError,
+} from '../../redux/campers/campersSelectors';
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(s => s.campers);
-  const filters = useSelector(s => s.filters);
+  const campers = useSelector(selectCampers);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchCampers({ filters, page: 1, limit: 8 }));
-  }, [dispatch, filters]);
-
-  if (isLoading) return <p>Loading campers...</p>;
-  if (error) return <p>Oops: {error}</p>;
+    dispatch(fetchCampers());
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Catalog</h1>
-      <CatalogList campers={items} />
+
+      {isLoading && <Loader />}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {!isLoading && !error && <CatalogList campers={campers} />}
     </div>
   );
 };

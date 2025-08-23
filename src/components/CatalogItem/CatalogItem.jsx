@@ -1,12 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import s from './CatalogItem.module.css';
 import { Map, StarRating, Heart } from '../../assets/icons/iconsComp.js';
 import { mapFeatures } from '../../utils/featuresMapper.js';
-import { Link } from 'react-router-dom';
-import Button from '../Button/Button.jsx';
+import Button from '../Button/Button.jsx'; // ← підключаємо твій компонент
 
 const CatalogItem = ({ camper }) => {
+  const navigate = useNavigate();
   const features = mapFeatures(camper);
-  console.log(camper.gallery, camper.image);
+
+  const handleShowMore = () => {
+    navigate(`/catalog/${camper.id}`);
+  };
 
   return (
     <div className={s.card}>
@@ -24,18 +28,18 @@ const CatalogItem = ({ camper }) => {
           <div className={s.price}>
             €{Number(camper.price).toFixed(2)}
             <button className={s.favorite}>
-              <img src={Heart} alt="favorite" width={24} height={24} />
+              <Heart width={24} height={24} />
             </button>
           </div>
         </div>
 
         <div className={s.meta}>
           <span className={s.rating}>
-            <img src={StarRating} alt="rating" width={24} height={24} />{' '}
+            <StarRating />
             {camper.rating || 4.5} ({camper.reviews?.length || 0} Reviews)
           </span>
           <span className={s.location}>
-            <img src={Map} alt="location" width={24} height={24} />{' '}
+            <Map />
             {camper.location}
           </span>
         </div>
@@ -43,16 +47,14 @@ const CatalogItem = ({ camper }) => {
         <p className={s.description}>{camper.description}</p>
 
         <ul className={s.features}>
-          {features.map(({ label, icon }) => (
+          {features.map(({ label, icon: Icon }) => (
             <li key={label}>
-              <img src={icon} alt={label} width={24} height={24} /> {label}
+              <Icon /> {label}
             </li>
           ))}
         </ul>
 
-        <Link to={`/catalog/${camper.id}`}>
-          <Button>Show more</Button>
-        </Link>
+        <Button onClick={handleShowMore}>Show more</Button>
       </div>
     </div>
   );

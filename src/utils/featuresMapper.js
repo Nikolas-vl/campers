@@ -10,7 +10,7 @@ import {
   GasStove,
   IonWater,
   Diagram,
-} from '../assets/icons/iconsComp.js';
+} from '../assets/icons/iconsComp';
 
 export const mapFeatures = camper => {
   const features = [];
