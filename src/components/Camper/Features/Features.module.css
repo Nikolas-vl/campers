@@ -1,4 +1,11 @@
 .wrapper {
+  background: var(--color-inputs);
+  border-radius: 10px;
+  padding: 44px 80px;
+  width: 631px;
+  height: 588px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -12,41 +19,53 @@
 
 .chips li {
   padding: 10px 14px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-gray-light);
   border-radius: 20px;
-  font-size: 14px;
+
+  font-family: var(--ff-inter);
+  font-weight: var(--fw-medium);
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--color-main);
+
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #101828;
-  background: #f9fafb;
+  background: var(--color-badges);
 }
 
 .details {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-gray-light);
   padding-top: 16px;
 }
 
 .details h4 {
   margin-bottom: 16px;
-  font-weight: 600;
+
+  font-family: var(--ff-inter);
+  font-weight: var(--fw-semibold);
   font-size: 18px;
-  color: #101828;
+  line-height: 133%;
+  color: var(--color-main);
 }
 
 .details dl {
   display: grid;
   grid-template-columns: 140px 1fr;
   row-gap: 10px;
+
+  font-family: var(--ff-inter);
   font-size: 14px;
 }
 
 .details dt {
-  color: #6c717b;
+  color: var(--color-gray);
+  font-weight: var(--fw-regular);
 }
 
 .details dd {
   margin: 0;
-  font-weight: 500;
-  color: #101828;
+  font-weight: var(--fw-medium);
+  color: var(--color-main);
 }
