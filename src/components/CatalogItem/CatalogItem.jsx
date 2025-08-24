@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './CatalogItem.module.css';
-import { Map, StarRating, Heart } from '../../assets/icons/iconsComp.js';
+import { Map, Heart } from '../../assets/icons/iconsComp.js';
 import { mapFeatures } from '../../utils/featuresMapper.js';
 import Button from '../Button/Button.jsx';
 import { toggleFavorite } from '../../redux/favorite/favoriteSlice.js';
