@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCamperById } from '../../redux/campers/campersOperations';
@@ -7,7 +7,9 @@ import {
   selectIsLoading,
   selectError,
 } from '../../redux/campers/campersSelectors';
+import { clearSelectedCamper } from '../../redux/campers/campersSlice';
 import Loader from '../../components/Loader/Loader';
+import Camper from '../../components/Camper/Camper';
 
 const CamperPage = () => {
   const { id } = useParams();
@@ -16,22 +18,18 @@ const CamperPage = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  const [tab, setTab] = useState('features');
+
   useEffect(() => {
     dispatch(fetchCamperById(id));
+    return () => dispatch(clearSelectedCamper());
   }, [dispatch, id]);
 
   if (isLoading) return <Loader />;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (!camper) return <p>Camper not found</p>;
+  if (!camper) return null;
 
-  return (
-    <div>
-      <h1>{camper.name}</h1>
-      <p>{camper.description}</p>
-      <p>Price: €{Number(camper.price).toFixed(2)}</p>
-      {/* можна додати фото, характеристики, відгуки */}
-    </div>
-  );
+  return <Camper camper={camper} tab={tab} setTab={setTab} />;
 };
 
 export default CamperPage;

@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './CatalogItem.module.css';
-import {
-  Map,
-  StarRating,
-  Heart,
-  HeartT,
-} from '../../assets/icons/iconsComp.js';
+import { Map, StarRating, Heart } from '../../assets/icons/iconsComp.js';
 import { mapFeatures } from '../../utils/featuresMapper.js';
 import Button from '../Button/Button.jsx';
 import { toggleFavorite } from '../../redux/favorite/favoriteSlice.js';
+import Star from '../Star/Star.jsx';
 
 const CatalogItem = ({ camper }) => {
   const navigate = useNavigate();
@@ -28,9 +24,6 @@ const CatalogItem = ({ camper }) => {
     dispatch(toggleFavorite(camper.id));
   };
 
-  console.log('Favorites:', favorites);
-  console.log('isFavorite:', isFavorite);
-
   return (
     <div className={s.card}>
       <div className={s.imageWrapper}>
@@ -40,7 +33,6 @@ const CatalogItem = ({ camper }) => {
           className={s.image}
         />
       </div>
-
       <div className={s.content}>
         <div className={s.header}>
           <h3 className={s.name}>{camper.name}</h3>
@@ -50,18 +42,24 @@ const CatalogItem = ({ camper }) => {
               className={`${s.favorite} ${isFavorite ? s.active : ''}`}
               onClick={handleFavorite}
             >
-              <Heart width={24} height={24} />
+              <Heart width={26} height={26} />
             </button>
           </div>
         </div>
 
         <div className={s.meta}>
           <span className={s.rating}>
-            <StarRating />
-            {camper.rating || 4.5} ({camper.reviews?.length || 0} Reviews)
+            <Star value={camper.rating || 4.5} mode="single" size={16} />
+            {camper.rating || 4.5}{' '}
+            <span
+              className={s.reviewsLink}
+              onClick={() => navigate(`/catalog/${camper.id}#reviews`)}
+            >
+              ({camper.reviews?.length || 0} Reviews)
+            </span>
           </span>
           <span className={s.location}>
-            <Map />
+            <Map width={16} height={16} className={s.map} />
             {camper.location}
           </span>
         </div>
@@ -71,12 +69,14 @@ const CatalogItem = ({ camper }) => {
         <ul className={s.features}>
           {features.map(({ label, icon: Icon }) => (
             <li key={label}>
-              <Icon /> {label}
+              <Icon width={20} height={20} /> {label}
             </li>
           ))}
         </ul>
 
-        <Button onClick={handleShowMore}>Show more</Button>
+        <Button className={s.btnShowMore} onClick={handleShowMore}>
+          Show more
+        </Button>
       </div>
     </div>
   );

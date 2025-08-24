@@ -1,0 +1,9 @@
+.multi {
+  color: var(--color-rating);
+  font-size: 14px;
+}
+
+.single {
+  display: inline-block;
+  font-weight: bold;
+}

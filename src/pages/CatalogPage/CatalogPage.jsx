@@ -15,7 +15,6 @@ import Filter from '../../components/Filter/Filter';
 import { selectFilters } from '../../redux/filters/filtersSelectors';
 import { clearCampers } from '../../redux/campers/campersSlice';
 import { resetFilters } from '../../redux/filters/filtersSlice';
-
 import {
   setPage,
   setAppliedFilters,
@@ -37,8 +36,11 @@ const CatalogPage = () => {
   const limit = 4;
 
   useEffect(() => {
-    dispatch(fetchCampers({ page, limit, filters: appliedFilters }));
-  }, [dispatch, page, limit, appliedFilters]);
+    const haveEnough = campers.length >= page * limit;
+    if (!haveEnough) {
+      dispatch(fetchCampers({ page, limit, filters: appliedFilters }));
+    }
+  }, [dispatch, page, limit, campers.length, appliedFilters]);
 
   const handleLoadMore = () => {
     dispatch(setPage(page + 1));
@@ -57,15 +59,21 @@ const CatalogPage = () => {
   };
 
   return (
-    <div className={s.wrapper}>
-      <Filter onSearch={handleSearch} onReset={handleReset} />
-      <div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <CatalogList campers={campers} />
-        {isLoading && <Loader />}
-        {campers.length < total && !isLoading && (
-          <Button onClick={handleLoadMore}>Load More</Button>
-        )}
+    <div className={`container`}>
+      <div className={s.wrapper}>
+        <Filter onSearch={handleSearch} onReset={handleReset} />
+        <div className={s.right}>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <CatalogList campers={campers} />
+          {isLoading && <Loader />}
+          {campers.length < total && !isLoading && (
+            <div className={s.loadMoreWrapper}>
+              <Button className={s.btn} onClick={handleLoadMore}>
+                Load More
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

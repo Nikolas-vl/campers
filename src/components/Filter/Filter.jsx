@@ -10,7 +10,17 @@ import {
   selectEquipment,
 } from '../../redux/filters/filtersSelectors';
 
+import {
+  Wind,
+  CupHot,
+  Shower,
+  Tv,
+  Diagram,
+  Map,
+} from '../../assets/icons/iconsComp';
+
 import s from './Filter.module.css';
+import Button from '../Button/Button';
 
 const Filter = ({ onSearch, onReset }) => {
   const dispatch = useDispatch();
@@ -18,91 +28,114 @@ const Filter = ({ onSearch, onReset }) => {
   const vehicleType = useSelector(selectVehicleType);
   const equipment = useSelector(selectEquipment);
 
-  const handleEquipmentClick = key => {
-    dispatch(toggleEquipment(key));
-  };
-
-  const handleSearch = () => {
-    if (onSearch) onSearch();
-  };
+  const handleEquipmentClick = key => dispatch(toggleEquipment(key));
+  const handleSearch = () => onSearch && onSearch();
 
   return (
     <div className={s.panel}>
-      <h3>Location</h3>
-      <input
-        type="text"
-        value={location}
-        onChange={e => dispatch(setLocation(e.target.value))}
-        placeholder="Enter location..."
-      />
-
-      <h3>Vehicle equipment</h3>
+      <h3 className={s.subtitle}>Location</h3>
+      <div className={s.inputWrapper}>
+        <Map className={s.icon} />
+        <input
+          className={s.input}
+          type="text"
+          value={location}
+          onChange={e => dispatch(setLocation(e.target.value))}
+          placeholder="Enter location..."
+        />
+      </div>
+      <h3 className={s.mainTitle}>Filters</h3>
+      <h3 className={s.sectionTitle}>Vehicle equipment</h3>
       <div className={s.group}>
         <button
-          className={equipment.ac ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${equipment.ac ? s.active : ''}`}
           onClick={() => handleEquipmentClick('ac')}
         >
-          AC
+          <Wind width={32} height={32} />
+          <span>AC</span>
         </button>
+
         <button
-          className={equipment.automatic ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${equipment.automatic ? s.active : ''}`}
           onClick={() => handleEquipmentClick('automatic')}
         >
-          Automatic
+          <Diagram width={32} height={32} />
+          <span>Automatic</span>
         </button>
+
         <button
-          className={equipment.kitchen ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${equipment.kitchen ? s.active : ''}`}
           onClick={() => handleEquipmentClick('kitchen')}
         >
-          Kitchen
+          <CupHot width={32} height={32} />
+          <span>Kitchen</span>
         </button>
+
         <button
-          className={equipment.TV ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${equipment.TV ? s.active : ''}`}
           onClick={() => handleEquipmentClick('TV')}
         >
-          TV
+          <Tv width={32} height={32} />
+          <span>TV</span>
         </button>
+
         <button
-          className={equipment.bathroom ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${equipment.bathroom ? s.active : ''}`}
           onClick={() => handleEquipmentClick('bathroom')}
         >
-          Bathroom
+          <Shower width={32} height={32} />
+          <span>Bathroom</span>
         </button>
       </div>
 
-      <h3>Vehicle type</h3>
+      <h3 className={s.sectionTitle}>Vehicle type</h3>
       <div className={s.group}>
         <button
-          className={vehicleType === 'van' ? s.active : ''}
-          onClick={() => dispatch(setVehicleType('van'))}
+          type="button"
+          className={`${s.chip} ${
+            vehicleType === 'panelTruck' ? s.active : ''
+          }`}
+          onClick={() => dispatch(setVehicleType('panelTruck'))}
         >
-          Van
+          <span>Van</span>
         </button>
+
         <button
-          className={vehicleType === 'fullyIntegrated' ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${
+            vehicleType === 'fullyIntegrated' ? s.active : ''
+          }`}
           onClick={() => dispatch(setVehicleType('fullyIntegrated'))}
         >
-          Fully Integrated
+          <span>Fully Integrated</span>
         </button>
+
         <button
-          className={vehicleType === 'alcove' ? s.active : ''}
+          type="button"
+          className={`${s.chip} ${vehicleType === 'alcove' ? s.active : ''}`}
           onClick={() => dispatch(setVehicleType('alcove'))}
         >
-          Alcove
+          <span>Alcove</span>
         </button>
       </div>
 
-      <button className={s.search} onClick={handleSearch}>
-        Search
-      </button>
-      <button
-        className={s.reset}
-        onClick={() => {
-          if (onReset) onReset();
-        }}
-      >
-        Reset
-      </button>
+      <div className={s.actions}>
+        <Button type="button" className={s.search} onClick={handleSearch}>
+          Search
+        </Button>
+        <Button
+          type="button"
+          className={s.reset}
+          onClick={() => onReset && onReset()}
+        >
+          Reset
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,29 @@
-.wrapper{ 
+.wrapper {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 64px;
+  margin: 0 auto;
+  padding: 48px 0px;
+}
+
+.right {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.loadMoreWrapper{
+  margin: 0 auto;
+}
+
+.btn{
+  background: var(--color-white);
+  color: var(--color-main);
+  border: 1px solid var(--color-gray-light);
+  padding: 16px 32px;
+}
+
+.btn:hover{
+  background: var(--color-button);
+  color: var(--color-white);
 }

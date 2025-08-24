@@ -48,9 +48,3 @@ main {
   animation: spin 1s linear infinite;
   vertical-align: middle;
 }
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
