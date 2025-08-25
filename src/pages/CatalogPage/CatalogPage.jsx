@@ -27,7 +27,6 @@ const CatalogPage = () => {
   const campers = useSelector(selectCampers);
   const total = useSelector(selectTotal);
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   const filters = useSelector(selectFilters);
 
   const page = useSelector(state => state.catalogUi.page);
