@@ -18,15 +18,18 @@ const Features = ({ camper }) => {
       <ul className={s.chips}>
         {chips.map(({ label, icon: Icon }) => (
           <li key={label}>
-            <Icon /> {label}
+            <Icon /> {label.charAt(0).toUpperCase() + label.slice(1)}
           </li>
         ))}
       </ul>
+
       <div className={s.details}>
         <h4>Vehicle details</h4>
-        <dl>
+        <div className={s.divider} />
+
+        <dl className={s.rows}>
           {details.map(([k, v]) => (
-            <div key={k}>
+            <div key={k} className={s.row}>
               <dt>{k}</dt>
               <dd>{v}</dd>
             </div>

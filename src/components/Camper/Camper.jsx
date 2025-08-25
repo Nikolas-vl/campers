@@ -56,61 +56,63 @@ const Camper = ({ camper, tab, setTab }) => {
     })) || [];
 
   return (
-    <div className={'container'}>
-      <h1 className={s.name}>{camper.name}</h1>
+    <section className={'container'}>
+      <div className={s.wrapper}>
+        <h1 className={s.name}>{camper.name}</h1>
 
-      <div className={s.meta}>
-        <span className={s.rating}>
-          <Star value={camper.rating || 4.5} mode="single" size={16} />
-          {camper.rating || 4.5}{' '}
-          <span className={s.reviewsLink} onClick={() => setTab('reviews')}>
-            ({camper.reviews?.length || 0} Reviews)
+        <div className={s.meta}>
+          <span className={s.rating}>
+            <Star value={camper.rating || 4.5} mode="single" size={16} />
+            {camper.rating || 4.5}{' '}
+            <span className={s.reviewsLink} onClick={() => setTab('reviews')}>
+              ({camper.reviews?.length || 0} Reviews)
+            </span>
           </span>
-        </span>
 
-        <span className={s.location}>
-          <Map width={16} height={16} className={s.map} />
-          {camper.location}
-        </span>
-      </div>
-
-      <div className={s.price}>€{Number(camper.price).toFixed(2)}</div>
-
-      <ul className={s.gallery}>
-        {images.slice(0, 4).map((img, i) => (
-          <li key={i} onClick={() => setLightboxIndex(i)}>
-            <img src={img.thumb || img.src} alt={`Camper ${i + 1}`} />
-          </li>
-        ))}
-      </ul>
-
-      <p>{camper.description}</p>
-
-      <Tabs active={tab} onChange={setTab} />
-
-      <div className={s.content}>
-        <div className={s.left}>
-          {tab === 'features' ? (
-            <Features camper={camper} />
-          ) : (
-            <Reviews reviews={camper.reviews} />
-          )}
+          <span className={s.location}>
+            <Map width={16} height={16} className={s.map} />
+            {camper.location}
+          </span>
         </div>
-        <div className={s.right}>
-          <BookForm />
-        </div>
-      </div>
 
-      {lightboxIndex >= 0 && (
-        <Lightbox
-          open={lightboxIndex >= 0}
-          index={lightboxIndex}
-          close={() => setLightboxIndex(-1)}
-          slides={images}
-          plugins={[Thumbnails]}
-        />
-      )}
-    </div>
+        <div className={s.price}>€{Number(camper.price).toFixed(2)}</div>
+
+        <ul className={s.gallery}>
+          {images.slice(0, 4).map((img, i) => (
+            <li key={i} onClick={() => setLightboxIndex(i)}>
+              <img src={img.thumb || img.src} alt={`Camper ${i + 1}`} />
+            </li>
+          ))}
+        </ul>
+
+        <p>{camper.description}</p>
+
+        <Tabs active={tab} onChange={setTab} />
+
+        <div className={s.content}>
+          <div className={s.left}>
+            {tab === 'features' ? (
+              <Features camper={camper} />
+            ) : (
+              <Reviews reviews={camper.reviews} />
+            )}
+          </div>
+          <div className={s.right}>
+            <BookForm />
+          </div>
+        </div>
+
+        {lightboxIndex >= 0 && (
+          <Lightbox
+            open={lightboxIndex >= 0}
+            index={lightboxIndex}
+            close={() => setLightboxIndex(-1)}
+            slides={images}
+            plugins={[Thumbnails]}
+          />
+        )}
+      </div>
+    </section>
   );
 };
 

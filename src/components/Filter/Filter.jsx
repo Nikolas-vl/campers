@@ -128,13 +128,6 @@ const Filter = ({ onSearch, onReset }) => {
         <Button type="button" className={s.search} onClick={handleSearch}>
           Search
         </Button>
-        <Button
-          type="button"
-          className={s.reset}
-          onClick={() => onReset && onReset()}
-        >
-          Reset
-        </Button>
       </div>
     </div>
   );

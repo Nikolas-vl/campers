@@ -60,7 +60,7 @@ const CatalogPage = () => {
 
   return (
     <div className={`container`}>
-      <div className={s.wrapper}>
+      <section className={s.wrapper}>
         <Filter onSearch={handleSearch} onReset={handleReset} />
         <div className={s.right}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -74,7 +74,7 @@ const CatalogPage = () => {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
