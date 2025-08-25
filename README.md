@@ -1,12 +1,66 @@
-# React + Vite
+TravelTrucks — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Client-side part of a camper rental web application. Implemented: homepage,
+catalog with filters and pagination, camper details page with gallery, features,
+reviews, and booking form. Stack: Vite, React, Redux Toolkit, React Router,
+Axios.
 
-Currently, two official plugins are available:
+Main Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Routes: / (Home), /catalog (Catalog), /catalog/:id (Details).
 
-## Expanding the ESLint configuration
+Backend filtering: location (dropdown list of cities → Ukraine, <City>), body
+type (panelTruck | fullyIntegrated | alcove), features (AC, bathroom, kitchen,
+TV, radio, refrigerator, microwave, gas, water). Results reset before a new
+request.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Pagination via “Load More” button with active filters applied.
+
+Favorites persisted in localStorage.
+
+Camper details: photo gallery (universal URL extractor), Features/Details
+blocks, reviews with 5-star rating, booking form with validation and success
+notification.
+
+Price format: 8000.00.
+
+Installation & Running
+
+Requirements: Node.js 18+
+
+# install dependencies
+
+npm install
+
+# development mode
+
+npm run dev
+
+# production build
+
+npm run build
+
+# preview production build locally
+
+npm run preview
+
+Usage
+
+Open / and click View Now to go to the catalog.
+
+On /catalog, select filters and click Apply filters (results update from the
+backend).
+
+Load more cards with the Load More button; add/remove items from Favorites.
+
+Click Show more on a card → opens /catalog/:id in a new tab with gallery,
+features, reviews, and booking form.
+
+Fill in the form (name, email, date) — after submission, a notification confirms
+successful booking.
+
+Author
+
+Name: Nikolas GitHub: https://github.com/Nikolas-vl
+
+Email: nikvv02@gmail.com

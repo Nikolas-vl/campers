@@ -17,7 +17,7 @@ const CatalogItem = ({ camper }) => {
   const features = mapFeatures(camper);
 
   const handleShowMore = () => {
-    navigate(`/catalog/${camper.id}`);
+    window.open(`/catalog/${camper.id}`, '_blank');
   };
 
   const handleFavorite = () => {
