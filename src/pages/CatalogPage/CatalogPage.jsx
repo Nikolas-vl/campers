@@ -63,7 +63,6 @@ const CatalogPage = () => {
       <section className={s.wrapper}>
         <Filter onSearch={handleSearch} onReset={handleReset} />
         <div className={s.right}>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
           <CatalogList campers={campers} />
           {isLoading && <Loader />}
           {campers.length < total && !isLoading && (

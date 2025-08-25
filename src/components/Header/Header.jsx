@@ -14,14 +14,16 @@ const Header = () => {
             <li className={s.link}>
               <NavLink
                 to="/"
+                end
                 className={({ isActive }) => (isActive ? s.active : '')}
               >
                 Home
               </NavLink>
             </li>
-            <li>
+            <li className={s.link}>
               <NavLink
                 to="/catalog"
+                end
                 className={({ isActive }) => (isActive ? s.active : '')}
               >
                 Catalog

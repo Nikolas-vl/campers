@@ -9,7 +9,7 @@ import {
   selectVehicleType,
   selectEquipment,
 } from '../../redux/filters/filtersSelectors';
-
+import Select from 'react-select';
 import {
   Wind,
   CupHot,
@@ -31,17 +31,29 @@ const Filter = ({ onSearch, onReset }) => {
   const handleEquipmentClick = key => dispatch(toggleEquipment(key));
   const handleSearch = () => onSearch && onSearch();
 
+  const options = [
+    { value: 'Kyiv', label: 'Kyiv' },
+    { value: 'Poltava', label: 'Poltava' },
+    { value: 'Dnipro', label: 'Dnipro' },
+    { value: 'Odesa', label: 'Odesa' },
+    { value: 'Kharkiv', label: 'Kharkiv' },
+    { value: 'Sumy', label: 'Sumy' },
+    { value: 'Lviv', label: 'Lviv' },
+  ];
+
   return (
     <div className={s.panel}>
       <h3 className={s.subtitle}>Location</h3>
-      <div className={s.inputWrapper}>
+      <div className={`${s.inputWrapper} ${s.selectWrap}`}>
         <Map className={s.icon} />
-        <input
-          className={s.input}
-          type="text"
-          value={location}
-          onChange={e => dispatch(setLocation(e.target.value))}
-          placeholder="Enter location..."
+        <Select
+          className={s.select}
+          classNamePrefix="rs"
+          placeholder="Select location..."
+          options={options}
+          value={options.find(o => o.value === location) || null}
+          onChange={opt => dispatch(setLocation(opt.value))}
+          isSearchable={false}
         />
       </div>
       <h3 className={s.mainTitle}>Filters</h3>
